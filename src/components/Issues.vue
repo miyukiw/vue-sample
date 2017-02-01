@@ -11,23 +11,32 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'issues',
   data () {
     return {
-      issues: [{
-        number: 1234,
-        title: 'issue #1'
-      },
-      {
-        number: 1235,
-        title: 'issue #2'
-      }]
+      issues: []
     }
   },
-  created: () => {
-    // GET request
 
+  created: function () {
+    // GET request
+    this.fetchData()
+  },
+
+  methods: {
+    fetchData: function () {
+      const self = this
+      axios.get('https://api.github.com/repos/angular/protractor/issues?page=1&per_page=10')
+      .then(function (response) {
+        self.issues = response.data
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    }
   }
 }
 </script>
