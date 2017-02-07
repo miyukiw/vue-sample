@@ -24,7 +24,7 @@ export default {
   methods: {
     fetchData: function (number) {
       const self = this
-      axios.get('https://api.github.com/repos/angular/protractor/issues/' + number)
+      axios.get('https://api.github.com/repos/vuejs/vue/issues/' + number)
       .then(function (response) {
         self.issue = response.data
       })
